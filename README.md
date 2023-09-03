@@ -3,23 +3,31 @@
 ## VECTORS
 
 - `vector<Type>(size_type n, const Type& val = Type())`: Constructs a dynamic array that can be resized. Suitable for sequential access and dynamic size changes.
+- `vector<vector<int>> vec(5, vector<int>(3));`:  To creat a two dimensional vector of type int, for example, with size [5,3].
 - **Element Access:**
   - `iterator end()`: Returns an iterator pointing to the element following the last element. **Time Complexity**: O(1)
   - `iterator begin()`: Returns an iterator pointing to the first element. **Time Complexity**: O(1)
   - `reference at(size_type pos)`: Returns a reference to the element at position `pos`. **Time Complexity**: O(1)
   - `reference front()`: Returns a reference to the first element. **Time Complexity**: O(1)
   - `reference back()`: Returns a reference to the last element. **Time Complexity**: O(1)
-  - `const_iterator cend() const`: Returns a const_iterator pointing to the element following the last element. **Time Complexity**: O(1)
+  - `const_iterator cend() const`: Returns a **const_iterator** pointing to the element following the last element. **Time Complexity**: O(1)
+  - `const_iterator cbegin() const`: Returns a **const_iterator** pointing to the first element. **Time Complexity**: O(1)
+  - `const_iterator rbegin() const`: Returns a **reverse_iterator** pointing to the last element. **Time Complexity**: O(1)
+  - `const_iterator rend() const`: Returns a **reverse_iterator** pointing to the element preceding the first element. **Time Complexity**: O(1)
+
+      `for (auto it = vec.rbegin(); it != vec.rend(); ++it) cout << *it << endl; `
 - **Element Manipulation:**
-  - `iterator insert(iterator pos, const Type& val)`: Inserts an element `val` before the position `pos`. **Time Complexity**: O(n)
+  - `iterator insert(iterator pos, const Type& val)`: Inserts an element `val` before the position `pos`. 
+  - `void push_back(const Type& val)`: Inserts the element `val` at the end of the vector. **Time Complexity**: O(1). If the vector is full, the vector is reallocated with a larger capacity.
+  - `void pop_back()`: Removes the last element from the vector. **Time Complexity**: O(1)
+  - **Time Complexity**: O(n).
   - `iterator emplace(iterator pos, Args&&... args)`: Inserts an element constructed with `args` before the position `pos`. **Time Complexity**: O(n)
-  - `iterator erase(iterator pos)`: Removes the element at position `pos`. **Time Complexity**: O(n)
+    - example: `vec.emplace(vec.end(), 10);` inserts 10 at the end of the vector.
+    - `iterator erase(iterator pos)`: Removes the element at position `pos`. Returns an iterator pointing to the element following the removed element. **Time Complexity**: O(n)
   - `void clear()`: Removes all elements from the vector. **Time Complexity**: O(n)
 - **Capacity and Size:**
   - `bool empty() const`: Returns true if the vector is empty. **Time Complexity**: O(1)
   - `size_type size() const`: Returns the number of elements in the vector. **Time Complexity**: O(1)
-  - `Type& front()`: Returns a reference to the first element. **Time Complexity**: O(1)
-  - `Type& back()`: Returns a reference to the last element. **Time Complexity**: O(1)
   - `void resize(size_type n, Type val = Type())`: Resizes the container to contain `n` elements, setting new elements to `val`. **Time Complexity**: O(n)
   - `size_type capacity() const`: Returns the number of elements that the container can hold. **Time Complexity**: O(1)
   - `void reserve(size_type n)`: Increases the capacity of the vector to at least `n` elements. **Time Complexity**: O(n)
@@ -68,13 +76,6 @@
   - `bool empty() const`: Returns true if the priority queue is empty. **Time Complexity**: O(1)
   - `size_type size() const`: Returns the number of elements in the priority queue. **Time Complexity**: O(1)
 
-## PAIR
-
-- `pair<T1, T2>`: Represents a simple container holding two values of possibly different types. Commonly used for returning multiple values from a function.
-- **Structure:**
-  - `T1 first`: Holds the first value of the pair.
-  - `T2 second`: Holds the second value of the pair.
-
 ## STACK
 
 - `stack<Type>`: Implements a Last-In-First-Out (LIFO) data structure. Suitable for managing function calls, backtracking, and evaluating expressions.
@@ -86,23 +87,54 @@
   - `bool empty() const`: Returns true if the stack is empty. **Time Complexity**: O(1)
   - `size_type size() const`: Returns the number of elements in the stack. **Time Complexity**: O(1)
 
+## PAIR
+
+- `pair<T1, T2>`: Represents a simple container holding two values of possibly different types. Commonly used for returning multiple values from a function.
+- **Structure:**
+  - `T1 first`: Holds the first value of the pair.
+  - `T2 second`: Holds the second value of the pair.
+
+
+
 ## SET
 
 - `set<Type>`: Constructs a balanced binary search tree that stores unique elements in a sorted order. Suitable for maintaining a sorted collection of unique values.
+- `set<Type, greater<Type>>`: Constructs a balanced binary search tree that stores unique elements in a sorted order. Suitable for maintaining a sorted collection of unique values in descending order.
+- `set<Type> s(vec.begin(), vec.end());`: To initialize a set with a vector. Complixity: O(nlogn)
+
 - **Element Access:**
-  - `iterator end()`: Returns an iterator pointing to the element following the last element. **Time Complexity**: O(1)
   - `iterator begin()`: Returns an iterator pointing to the first element. **Time Complexity**: O(1)
+  - `iterator end()`: Returns an iterator pointing to the element following the last element. **Time Complexity**: O(1)
 - **Element Manipulation:**
   - `iterator insert(const Type& val)`: Inserts the element `val` into the set. **Time Complexity**: O(log n)
 - **Set Size:**
   - `size_type size() const`: Returns the number of elements in the set. **Time Complexity**: O(1)
   - `bool empty() const`: Returns true if the set is empty. **Time Complexity**: O(1)
 - **Set Searching and Bounds:**
-  - `iterator find(const Type& val)`: Returns an iterator to the element with value `val` in the set. **Time Complexity**: O(log n)
+  - `iterator find(const Type& val)`: Returns an iterator to the element with value `val` in the set, if not found returns `end()`. **Time Complexity**: O(log n).
   - `size_type count(const Type& val)`: Returns the number of elements with value `val` in the set. **Time Complexity**: O(log n)
   - `iterator lower_bound(const Type& val)`: Returns an iterator to the first element not less than `val`. **Time Complexity**: O(log n)
   - `iterator upper_bound(const Type& val)`: Returns an iterator to the first element greater than `val`. **Time Complexity**: O(log n)
   - `pair<iterator, iterator> equal_range(const Type& val)`: Returns a pair of iterators representing the range of elements with value `val`. **Time Complexity**: O(log n)
+
+
+## UNORDERED SET
+
+- `unordered_set<Type>`: Constructs an unordered hash set that stores unique elements. Provides fast constant-time average lookup.
+- `unordered_set<Type> s(vec.begin(), vec.end());`: To initialize an unordered set with a vector. **Complixity: O(n)**.
+
+- **Element Access:**
+  - `iterator begin()`: Returns an iterator pointing to the first element. **Time Complexity**: O(1)
+  - `iterator end()`: Returns an iterator pointing to the element following the last element. **Time Complexity**: O(1)
+- **Element Manipulation:**
+  - `pair<iterator, bool> insert(const Type& val)`: Inserts the element `val` into the unordered set. **Time Complexity**: Avg O(1), Worst O(n)
+  - `size_type erase(const Type& val)`: Removes the element with value `val` from the unordered set. **Time Complexity**: Avg O(1), Worst O(n)
+  - `void clear()`: Removes all elements from the unordered set. **Time Complexity**: O(n)
+- **Unordered Set Size:**
+  - `size_type size() const`: Returns the number of elements in the unordered set. **Time Complexity**: O(1)
+  - `bool empty() const`: Returns true if the unordered set is empty. **Time Complexity**: O(1)
+- **Unordered Set Searching:**
+  - `iterator find(const Type& val)`: Returns an iterator to the element with value `val` in the unordered set, if not found returns `end()`. **Time Complexity**: Avg O(1), Worst O(n). 
 
 ## MULTISET
 
@@ -124,23 +156,6 @@
   - `iterator lower_bound(const Type& val)`: Returns an iterator to the first element not less than `val`. **Time Complexity**: O(log n)
   - `iterator upper_bound(const Type& val)`: Returns an iterator to the first element greater than `val`. **Time Complexity**: O(log n)
   - `pair<iterator, iterator> equal_range(const Type& val)`: Returns a pair of iterators representing the range of elements with value `val`. **Time Complexity**: O(log n)
-
-## UNORDERED SET
-
-- `unordered_set<Type>`: Constructs an unordered hash set that stores unique elements. Provides fast constant-time average lookup.
-- **Element Access:**
-  - `iterator end()`: Returns an iterator pointing to the element following the last element. **Time Complexity**: O(1)
-  - `iterator begin()`: Returns an iterator pointing to the first element. **Time Complexity**: O(1)
-- **Element Manipulation:**
-  - `pair<iterator, bool> insert(const Type& val)`: Inserts the element `val` into the unordered set. **Time Complexity**: Avg O(1), Worst O(n)
-  - `size_type erase(const Type& val)`: Removes the element with value `val` from the unordered set. **Time Complexity**: Avg O(1), Worst O(n)
-  - `void clear()`: Removes all elements from the unordered set. **Time Complexity**: O(n)
-- **Unordered Set Size:**
-  - `size_type size() const`: Returns the number of elements in the unordered set. **Time Complexity**: O(1)
-  - `bool empty() const`: Returns true if the unordered set is empty. **Time Complexity**: O(1)
-- **Unordered Set Searching:**
-  - `iterator find(const Type& val)`: Returns an iterator to the element with value `val` in the unordered set. **Time Complexity**: Avg O(1), Worst O(n)
-
 
 ## MAP
 
