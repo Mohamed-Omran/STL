@@ -1,4 +1,24 @@
+<!--  This document will be pushed to https://github.com/Mohamed-Omran/STL -->
+
 # C++ STL Containers and Functions Summary
+
+- [C++ STL Containers and Functions Summary](#c-stl-containers-and-functions-summary)
+  - [VECTORS](#vectors)
+  - [LISTS](#lists)
+  - [QUEUE](#queue)
+  - [PRIORITY QUEUE](#priority-queue)
+  - [DEQUES](#deques)
+  - [STACK](#stack)
+  - [PAIR](#pair)
+  - [SET](#set)
+  - [UNORDERED SET](#unordered-set)
+  - [MULTISET](#multiset)
+  - [MAP](#map)
+  - [UNORDERED MAP](#unordered-map)
+  - [MULTIMAP](#multimap)
+  - [STRING](#string)
+
+
 
 ## VECTORS
 
@@ -76,13 +96,38 @@
   - `bool empty() const`: Returns true if the priority queue is empty. **Time Complexity**: O(1)
   - `size_type size() const`: Returns the number of elements in the priority queue. **Time Complexity**: O(1)
 
+## DEQUES
+
+- `deque<Type>(size_type n, const Type& val = Type())`: Constructs a double-ended queue that can be resized. Suitable for sequential access and dynamic size changes.
+- **Element Access:**
+  - `iterator end()`: Returns an iterator pointing to the element following the last element. **Time Complexity**: O(1)
+  - `iterator begin()`: Returns an iterator pointing to the first element. **Time Complexity**: O(1)
+  - `reference at(size_type pos)`: Returns a reference to the element at position `pos`. **Time Complexity**: O(1)
+  - `reference front()`: Returns a reference to the first element. **Time Complexity**: O(1)
+  - `reference back()`: Returns a reference to the last element. **Time Complexity**: O(1)
+  - `const_iterator cend() const`: Returns a const_iterator pointing to the element following the last element. **Time Complexity**: O(1)
+- **Element Manipulation:**
+  - `iterator insert(iterator pos, const Type& val)`: Inserts an element `val` before the position `pos`. **Time Complexity**: O(n)
+  - `iterator emplace(iterator pos, Args&&... args)`: Inserts an element constructed with `args` before the position `pos`. **Time Complexity**: O(n)
+  - `iterator erase(iterator pos)`: Removes the element at position `pos`. **Time Complexity**: O(n)
+  - `void clear()`: Removes all elements from the deque. **Time Complexity**: O(n)
+- **Capacity and Size:**
+  - `bool empty() const`: Returns true if the deque is empty. **Time Complexity**: O(1)
+  - `size_type size() const`: Returns the number of elements in the deque. **Time Complexity**: O(1)
+  - `Type& front()`: Returns a reference to the first element. **Time Complexity**: O(1)
+  - `Type& back()`: Returns a reference to the last element. **Time Complexity**: O(1)
+  - `void resize(size_type n, Type val = Type())`: Resizes the container to contain `n` elements, setting new elements to `val`. **Time Complexity**: O(n)
+  - `size_type max_size() const`: Returns the maximum possible size of the deque. **Time Complexity**: O(1)
+  - `void shrink_to_fit()`: Reduces the capacity of the deque to fit its size. **Time Complexity**: O(n)
+
+
 ## STACK
 
 - `stack<Type>`: Implements a Last-In-First-Out (LIFO) data structure. Suitable for managing function calls, backtracking, and evaluating expressions.
 - **Element Manipulation:**
   - `void push(const Type& val)`: Inserts the element `val` onto the top of the stack. **Time Complexity**: O(1)
-  - `void pop()`: Removes the top element from the stack. **Time Complexity**: O(1)
-  - `const Type& top() const`: Returns a const reference to the top element. **Time Complexity**: O(1)
+  - `void pop()`: Removes the top element from the stack, if empty the behavior is undefined. **Time Complexity**: O(1)
+  - `const Type& top() const`: Returns a const reference to the top element, if empty the behavior is undefined. **Time Complexity**: O(1).
 - **Stack Size:**
   - `bool empty() const`: Returns true if the stack is empty. **Time Complexity**: O(1)
   - `size_type size() const`: Returns the number of elements in the stack. **Time Complexity**: O(1)
